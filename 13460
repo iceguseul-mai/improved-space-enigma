@@ -16,6 +16,9 @@ def tilt(y, x, dr):
     
 def dfs(depth, ry, rx, by, bx):
     global ans
+    if (depth, ry, rx, by, bx) in v_set:
+        return
+    v_set.add((depth, ry, rx, by, bx))
     if depth > 10: return
 
     for dr in range(4):
@@ -45,7 +48,8 @@ for i in range(n):
             ry, rx = i, j
         if arr[i][j] == 'B':
             by, bx = i, j
-    
+
+v_set = set()
 ans = 11
 dfs(1, ry, rx, by, bx)
 if ans == 11:
