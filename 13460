@@ -1,0 +1,53 @@
+import sys
+input = sys.stdin.readline
+
+dir = [[0, 1], [1, 0], [-1, 0], [0, -1]]
+
+def tilt(y, x, dr):
+    back = -1
+    for cnt in range(1, 11):
+        ny, nx = y+dir[dr][0]*cnt, x+dir[dr][1]*cnt
+        if arr[ny][nx] == '#':
+            return cnt+back
+        if arr[ny][nx] == 'O':
+            return cnt
+        if arr[ny][nx] == 'R' or arr[ny][nx] == 'B':
+            back -= 1
+    
+def dfs(depth, ry, rx, by, bx):
+    global ans
+    if depth > 10: return
+
+    for dr in range(4):
+        r_mv = tilt(ry, rx, dr)
+        b_mv = tilt(by, bx, dr)
+        if r_mv==0 and b_mv==0:
+            continue
+        nry, nrx = ry+dir[dr][0]*r_mv, rx+dir[dr][1]*r_mv
+        nby, nbx = by+dir[dr][0]*b_mv, bx+dir[dr][1]*b_mv
+        if arr[nby][nbx] == 'O':
+            continue
+        else:
+            if arr[nry][nrx] == 'O':
+                ans = min(ans, depth)
+                return
+        arr[ry][rx], arr[by][bx] = '.', '.'
+        arr[nry][nrx], arr[nby][nbx] = 'R', 'B'
+        dfs(depth+1, nry, nrx, nby, nbx)
+        arr[nry][nrx], arr[nby][nbx] = '.', '.'
+        arr[ry][rx], arr[by][bx] = 'R', 'B'
+
+n, m = map(int, input().split())
+arr = [list(input()) for _ in range(n)]
+for i in range(n):
+    for j in range(m):
+        if arr[i][j] == 'R':
+            ry, rx = i, j
+        if arr[i][j] == 'B':
+            by, bx = i, j
+    
+ans = 11
+dfs(1, ry, rx, by, bx)
+if ans == 11:
+    ans = -1
+print(ans)
