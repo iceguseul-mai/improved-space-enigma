@@ -1,0 +1,4 @@
+from math import pi, sqrt
+a = int(input())/pi
+a = sqrt(a)
+print(a * pi * 2)
