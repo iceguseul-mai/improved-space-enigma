@@ -1,0 +1,1 @@
+{"name":"Local: 2212","url":"/workspaces/improved-space-enigma/2212.py","tests":[{"id":1753498607129,"input":"6\n2\n1 6 9 3 6 7","output":""},{"id":1753498633443,"input":"10\n5\n20 3 14 6 7 8 18 10 12 15","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/workspaces/improved-space-enigma/2212.py","group":"local","local":true}
